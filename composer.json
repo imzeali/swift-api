@@ -1,6 +1,12 @@
 {
   "name": "imzeali/swift-api",
   "type": "library",
+  "authors": [
+    {
+      "name": "zeali",
+      "email": "zealiemai@gmail.com"
+    }
+  ],
   "require": {
     "php": ">=7.1.0",
     "laravel/framework": "~5.8",
@@ -16,6 +22,9 @@
     }
   ],
   "autoload": {
+    "psr-4": {
+      "SwiftApi\\": "src/"
+    },
     "files": [
       "src/helpers.php"
     ]
@@ -26,7 +35,7 @@
         "SwiftApi\\SwiftApiServiceProvider"
       ],
       "aliases": {
-        "Admin": "SwiftApi\\Facades\\Admin"
+        "SwiftApi": "SwiftApi\\Facades\\Api"
       }
     }
   },
