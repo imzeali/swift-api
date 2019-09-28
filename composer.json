@@ -23,7 +23,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "SwiftApi\\SwiftAdminServiceProvider"
+        "SwiftApi\\SwiftApiServiceProvider"
       ],
       "aliases": {
         "Admin": "SwiftApi\\Facades\\Admin"
