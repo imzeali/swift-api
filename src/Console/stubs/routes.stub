@@ -2,19 +2,45 @@
 
 use Illuminate\Routing\Router;
 
-Admin::routes();
+SwiftApi::routes();
 
 Route::group([
     'prefix' => config('api.route.prefix'),
     'namespace' => config('api.route.namespace'),
     'middleware' => config('api.route.middleware'),
 ], function (Router $router) {
-
     $api_resources = require('api_resources.php');
+
     foreach ($api_resources as $name => $controller) {
-        $controller_path = config('api.route.namespace') .'\\'. $controller;
-        $options = ['except' => $controller_path::$method_guarded];
+        /** @var \SwiftApi\Controllers\ResourceController $controller_instance */
+
+        /**
+         * auto register CRUD route
+         */
+        $controller_path = config('api.route.namespace') . '\\' . $controller;
+        $controller_instance = new $controller_path;
+        $options = ['except' => $controller_instance->method_guarded];
         $router->apiResource($name, $controller, $options);
+
+        /**
+         * route of finite state machine
+         */
+        if ($controller_instance instanceof \SwiftApi\Controllers\FsmController) {
+            $router->patch("{$name}/{id}/transition", "{$controller}@transition");
+            $router->get("{$name}/{id}/transitions", "{$controller}@transitions");
+            $router->get("{$name}/{id}/operations_logs", "{$controller}@operations_logs");
+            $router->get("{$name}_states", "{$controller}@states");
+            $router->post("{$name}_transition_notice", "{$controller}@transitionNotice");
+        }
+
+
+        /**
+         * auto register custom route
+         */
+        $controller_instance->registerRoute($router);
+
+
     }
 
 });
+
