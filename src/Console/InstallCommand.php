@@ -61,7 +61,7 @@ class InstallCommand extends Command
         }
 
         $this->makeDir('/');
-        $this->line('<info>Admin directory was created:</info> ' . str_replace(base_path(), '', $this->directory));
+        $this->line('<info>Api directory was created:</info> ' . str_replace(base_path(), '', $this->directory));
 
         $this->makeDir('Controllers');
 
