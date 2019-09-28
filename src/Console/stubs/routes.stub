@@ -1,0 +1,20 @@
+<?php
+
+use Illuminate\Routing\Router;
+
+Admin::routes();
+
+Route::group([
+    'prefix' => config('api.route.prefix'),
+    'namespace' => config('api.route.namespace'),
+    'middleware' => config('api.route.middleware'),
+], function (Router $router) {
+
+    $api_resources = require('api_resources.php');
+    foreach ($api_resources as $name => $controller) {
+        $controller_path = config('api.route.namespace') .'\\'. $controller;
+        $options = ['except' => $controller_path::$method_guarded];
+        $router->apiResource($name, $controller, $options);
+    }
+
+});

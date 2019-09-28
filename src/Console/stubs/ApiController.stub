@@ -1,0 +1,14 @@
+<?php
+
+namespace DummyNamespace;
+
+use SwiftApi\Controllers\ResourceController;
+
+class DummyClass extends ResourceController
+{
+     public $model = DummyModel::class;
+     public $rules = [
+        'store'=>DummyStoreRequest::class,
+        'update'=>DummyUpdateRequest::class,
+     ];
+}
