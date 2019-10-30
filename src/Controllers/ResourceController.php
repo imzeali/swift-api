@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\morphToMany;
 use Illuminate\Database\Eloquent\Relations\hasManyThrough;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
@@ -146,7 +147,6 @@ class ResourceController extends Controller
         if (is_null($query)) {
             $query = $this->getQuery();
         }
-
         if ($this->collator_enable) {
             $sort_fields = request()->get('order_by', null);
             if (is_null($sort_fields)) {
@@ -154,7 +154,8 @@ class ResourceController extends Controller
                     $query instanceof BelongsToMany ||
                     $query instanceof HasMany ||
                     $query instanceof morphToMany ||
-                    $query instanceof hasManyThrough
+                    $query instanceof hasManyThrough ||
+                    $query instanceof MorphMany
                 ) {
                     $key = $query->getModel()->getKeyName();
                 } else {

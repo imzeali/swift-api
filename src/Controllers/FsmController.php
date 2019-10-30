@@ -41,7 +41,7 @@ class FsmController extends ResourceController
     {
         $odd_number = $request->input('odd_numbers');
         $transition = $request->input('transition');
-        $data = $request->input('other_data');
+        $data = $request->input('other_data',[]);
         if (!is_null($object = $this->getModelInstance()->where('remote_number', $odd_number)->first())){
             return DB::transaction(function () use ($object, $transition, $data) {
                 $result = $object->$transition($data);
