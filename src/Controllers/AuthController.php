@@ -15,6 +15,8 @@ use SwiftApi\Model\DingUsers;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
 
 class AuthController extends Controller
 {
@@ -72,7 +74,8 @@ class AuthController extends Controller
                         return DB::transaction(function () use ($ding_user_details, $unionid) {
                             $new_users = config('api.database.users_model')::create([
                                 'name' => array_get($ding_user_details,'name'),
-                                'username' => array_get($ding_user_details,'email'),
+                                'username' => array_get($ding_user_details,'unionid'),
+                                'password' => Hash::make(array_get($ding_user_details,'unionid')),
                                 'avatar' => array_get($ding_user_details,'avatar'),
                                 'email' => array_get($ding_user_details,'email'),
                             ]);
@@ -167,6 +170,6 @@ class AuthController extends Controller
     }
 
     public function getAuthUserInfo(){
-       return Auth::guard('api')->user();
+        return Auth::guard('api')->user();
     }
 }
