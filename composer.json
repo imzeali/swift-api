@@ -10,7 +10,7 @@
   "require": {
     "php": ">=7.1.0",
     "laravel/framework": "~5.8",
-    "imzeali/filter-eloquent": "^1.3",
+    "imzeali/filter-eloquent": "dev-master",
     "mingyoung/dingtalk": "^2.0",
     "doctrine/dbal": "~2.3"
   },
