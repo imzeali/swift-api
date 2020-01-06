@@ -12,7 +12,7 @@ class FsmController extends ResourceController
     public function transition(Request $request, $id)
     {
         $object = $this->getObject($id);
-        $transition = $request->get('transition',$request->input('transition'));
+        $transition = $request->get('transition', $request->input('transition'));
         $data = $request->input('data', []);
         return DB::transaction(function () use ($object, $transition, $data) {
             $result = $object->$transition($data);
@@ -26,6 +26,10 @@ class FsmController extends ResourceController
         return $this->getObject($id)->getTransitions();
     }
 
+    public function transitionsByState($state)
+    {
+        return $this->getModelInstance()->getTransitionsByState($state);
+    }
 
     public function operations_logs($id)
     {
@@ -41,15 +45,15 @@ class FsmController extends ResourceController
     {
         $odd_number = $request->input('odd_numbers');
         $transition = $request->input('transition');
-        $data = $request->input('other_data',[]);
-        if (!is_null($object = $this->getModelInstance()->where('remote_number', $odd_number)->first())){
+        $data = $request->input('other_data', []);
+        if (!is_null($object = $this->getModelInstance()->where('remote_number', $odd_number)->first())) {
             return DB::transaction(function () use ($object, $transition, $data) {
                 $result = $object->$transition($data);
                 $object->push();
-                return ['receive'=>'success'];
+                return ['receive' => 'success'];
             }, 5);
-        }else{
-            abort(404,'资源未找到');
+        } else {
+            abort(404, '资源未找到');
         }
     }
 }
