@@ -61,14 +61,18 @@ return [
         'permissions_table' => 'permissions',
         'permissions_model' => SwiftApi\Model\Permissions::class,
 
-        'ding_users_table' => 'ding_users',
-        'ding_users_model' => SwiftApi\Model\DingUsers::class,
 
         // Pivot table for table above.
         'operation_log_table' => 'operation_log',
         'user_permissions_table' => 'user_permissions',
         'role_users_table' => 'role_users',
         'role_permissions_table' => 'role_permissions',
+
+        //
+        'finite_state_machine_log_table' => 'fsm_logs',
+        'finite_state_machine_log_model' => SwiftApi\Model\Fsmlogs::class,
+
+
     ],
     'route' => [
 

@@ -8,7 +8,6 @@
 namespace SwiftApi;
 
 
-use EasyDingTalk\Application;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Arr;
 
@@ -64,20 +63,10 @@ class SwiftApiServiceProvider extends ServiceProvider
 
     }
 
-    public function registerDingTalk()
-    {
-
-        $this->app->singleton('DingTalk', function () {
-            return new Application(config('api.dingtalk'));
-        });
-
-    }
-
     public function register()
     {
         $this->loadApiAuthConfig();
 
-        $this->registerDingTalk();
         $this->registerRouteMiddleware();
         $this->commands($this->commands);
 

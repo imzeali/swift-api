@@ -15,7 +15,6 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Validator;
 
 class ResourceController extends Controller
 {

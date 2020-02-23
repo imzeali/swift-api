@@ -75,36 +75,15 @@ class CreateAdminTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create(config('api.database.ding_users_table'), function (Blueprint $table) {
+        Schema::create(config('api.database.finite_state_machine_log_table'), function (Blueprint $table) {
             $table->unsignedBigInteger('id', true);
-            $table->unsignedBigInteger('users_id');
-            $table->string('name', 40);
-            $table->string('unionid', 50);
-            $table->string('openid', 50);
-            $table->string('userid', 50);
-            $table->text('orderInDepts')->nullable();
-            $table->string('position', 50)->nullable();
-            $table->string('workPlace', 20)->nullable();
-            $table->smallInteger('isSenior')->nullable();
-            $table->smallInteger('isBoss')->nullable();
-            $table->text('tags')->nullable();
-            $table->text('extattr')->nullable();
-            $table->integer('stateCode')->nullable();
-            $table->text('avatar')->nullable();
-            $table->integer('jobnumber')->nullable();
-            $table->text('isLeaderInDepts')->nullable();
-            $table->smallInteger('active')->nullable();
-            $table->smallInteger('isAdmin')->nullable();
-            $table->string('hiredDate')->nullable();
-            $table->string('mobile', 15)->nullable();
-            $table->smallInteger('isHide')->nullable();
-            $table->string('email', 50)->nullable();
-            $table->string('orgEmail', 50)->nullable();
-            $table->text('remark')->nullable();
-            $table->string('tel', 20)->nullable();
-            $table->text('roles')->nullable();
-            $table->text('department')->nullable();
-
+            $table->string('fsm_logs_able_type', 200);
+            $table->unsignedBigInteger('fsm_logs_able_id');
+            $table->string('from', 50);
+            $table->string('to', 50);
+            $table->string('transition', 50);
+            $table->string('remark', 3000)->nullable();
+            $table->unsignedBigInteger('creator_id');
             $table->timestamps();
         });
     }
@@ -116,6 +95,7 @@ class CreateAdminTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists(config('api.database.finite_state_machine_log_table'));
         Schema::dropIfExists(config('api.database.users_table'));
         Schema::dropIfExists(config('api.database.roles_table'));
         Schema::dropIfExists(config('api.database.permissions_table'));
@@ -123,6 +103,5 @@ class CreateAdminTable extends Migration
         Schema::dropIfExists(config('api.database.role_users_table'));
         Schema::dropIfExists(config('api.database.role_permissions_table'));
         Schema::dropIfExists(config('api.database.operation_log_table'));
-        Schema::dropIfExists(config('api.database.ding_talk_users_table'));
     }
 }

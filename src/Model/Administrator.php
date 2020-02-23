@@ -38,10 +38,6 @@ class Administrator extends Model implements AuthenticatableContract
         parent::__construct($attributes);
     }
 
-    public function ding_users()
-    {
-        return $this->hasOne(DingUsers::class, "users_id", "id");
-    }
     /**
      * A user has and belongs to many roles.
      *

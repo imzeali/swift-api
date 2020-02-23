@@ -10,17 +10,11 @@
   "require": {
     "php": ">=7.1.0",
     "laravel/framework": "~5.8",
-    "imzeali/filter-eloquent": "dev-master",
-    "mingyoung/dingtalk": "^2.0",
-    "doctrine/dbal": "~2.3"
+    "doctrine/dbal": "~2.3",
+    "imzeali/finite": "^1.1.5",
+    "imzeali/filter-eloquent": "^1.5"
   },
   "license": "MIT",
-  "authors": [
-    {
-      "name": "zeali",
-      "email": "zealiemai@gmail.com"
-    }
-  ],
   "autoload": {
     "psr-4": {
       "SwiftApi\\": "src/"
