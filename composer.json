@@ -9,7 +9,7 @@
   ],
   "require": {
     "php": ">=7.1.0",
-    "laravel/framework": "~5.8",
+    "laravel/framework": ">=5.8",
     "doctrine/dbal": "~2.3",
     "imzeali/finite": "^1.1.5",
     "imzeali/filter-eloquent": "^1.5"
