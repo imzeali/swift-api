@@ -10,7 +10,6 @@ namespace SwiftApi\Traits;
 
 
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Redis;
 
 trait WithSerialNumber
 {
