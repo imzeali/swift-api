@@ -2,7 +2,6 @@
 
 namespace SwiftApi\Model;
 
-use SwiftApi\Auth\Database\HasPermissions;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;

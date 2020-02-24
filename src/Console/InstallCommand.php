@@ -9,7 +9,7 @@ namespace SwiftApi\Console;
 
 
 use Illuminate\Console\Command;
-use Illuminate\Contracts\Filesystem\Filesystem;
+use SwiftApi\Model\ApiTablesSeeder;
 use Symfony\Component\Process\Process;
 
 class InstallCommand extends Command
@@ -41,6 +41,9 @@ class InstallCommand extends Command
 
         $userModel = config('api.database.users_model');
 
+        if ($userModel::count() == 0) {
+            $this->call('db:seed', ['--class' => ApiTablesSeeder::class]);
+        }
     }
 
     public function handle()
