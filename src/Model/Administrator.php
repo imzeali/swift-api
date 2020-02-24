@@ -6,7 +6,6 @@ use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 /**
@@ -20,7 +19,6 @@ class Administrator extends Model implements AuthenticatableContract
 
     protected $fillable = ['username', 'password', 'name', 'avatar', 'api_token'];
     protected $hidden = ['password', 'api_token', 'remember_token'];
-    protected $with = ['ding_users'];
     /**
      * Create a new Eloquent model instance.
      *
