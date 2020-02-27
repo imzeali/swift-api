@@ -55,14 +55,14 @@ class Api
 
             $router->get('auth/ding_talk_login', $authController . '@getDingTalkLogin')->name('api.ding_talk_login');
             $router->get('auth/callback_ding_talk_login', $authController . '@callbackDingTalkLogin')->name('api.callback_ding_talk_login');
-            $router->get('auth/logout', $authController . '@logout')->name('api.logout');
+            $router->post('auth/logout', $authController . '@logout')->name('api.logout');
             $router->post('auth/login', $authController . '@login')->name('api.login');
         });
 
         $attributes['middleware'] = config('api.route.middleware');
 
         app('router')->group($attributes, function ($router) use ($authController) {
-            $router->get('auth/user/info', $authController . '@getAuthUserInfo')->name('api.get_auth_use_info');
+            $router->get('user/info', $authController . '@getAuthUserInfo')->name('api.get_auth_use_info');
         });
 
     }
