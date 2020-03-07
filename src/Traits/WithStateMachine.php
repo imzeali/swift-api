@@ -262,7 +262,7 @@ trait WithStateMachine
     public function getOperator()
     {
         if (is_null($this->operator)) {
-            $this->setOperator(Auth::user());
+            $this->setOperator(Auth::guard('api')->user());
             return $this->operator;
         } else {
             return $this->operator;
