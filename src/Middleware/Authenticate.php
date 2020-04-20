@@ -17,7 +17,6 @@ class Authenticate
      */
     public function handle($request, Closure $next)
     {
-//        $redirectTo = api_base_path(config('api.auth.redirect_to', 'auth/ding_talk_login'));
 
         if (Auth::guard('api')->guest() && !$this->shouldPassThrough($request)) {
             return abort(401);

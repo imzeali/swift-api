@@ -19,7 +19,7 @@ trait WithCreator
         static::creating(function ($model) {
             if (!array_key_exists('creator_id',$model->attributes)
                 ||is_null($model->attributes['creator_id'])) {
-                $model->creator_id = Auth::id();
+                $model->creator_id = Auth::guard('api')->id();
             }
         });
     }
