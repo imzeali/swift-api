@@ -47,12 +47,8 @@ trait WithSerialNumber
 
     public function resetCount($key)
     {
-        $today_start_data = date("Y-m-d 00:00:00");
-        $today_end_data = date("Y-m-d 23:59:59");
-        $today_end_str = strtotime($today_end_data);
-        $expire_time = $today_end_str - time();
-        $max_count = (int)substr($this->whereBetween('created_at', [$today_start_data, $today_end_data])->lockForUpdate()->max('number'), -4);
-        Cache::set($key, $max_count, $expire_time);
+        $max_count = (int)substr($this->whereBetween('created_at', [today(), today()->addHour('24')])->lockForUpdate()->max('number'), -4);
+        Cache::put($key, $max_count, today()->addHour('24'));
 
         return $max_count;
     }
