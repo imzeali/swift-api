@@ -14,7 +14,7 @@ trait WithFsmLogs
 
     public function operation($transition)
     {
-        return $this->fsm_logs()->where('transition', '=', $transition)->orderBy('id', 'desc')->first();
+        return $this->fsm_logs()->where('transition', '=', $transition)->first();
     }
 
     public function operations($transition)
@@ -28,14 +28,13 @@ trait WithFsmLogs
 
     public function operating_time($transition)
     {
-        $logs = $this->fsm_logs()->where('transition', '=', $transition)->orderBy('id', 'desc')->first();
+        $logs = $this->fsm_logs()->where('transition', '=', $transition)->first();
 
         if (is_null($logs)) {
             return null;
         }
 
-        return $logs->created_at;
-
+        return $logs->created_at->toDateTimeString();
     }
 
 }
